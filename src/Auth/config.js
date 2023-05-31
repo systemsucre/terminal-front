@@ -1,6 +1,7 @@
 const DB_DATABASE = process.env.DB_DATABASE || 'sp';
-// const URL = 'http://localhost:3001'
- const URL = 'https://spclaver.alwaysdata.net'
+const URL = 'http://localhost:3001'
+
+//  const URL = 'https://spclaver.alwaysdata.net'
 
 const TIEMPO_INACTIVO = 60 // MINUTOS DE TOLERANCIA ANTESDE QUE EL USUARIO VUELVA A INTERACTUAR CON EL SISTEMA YA SEA MEDIANTE MUOSE O TECLADO
 const INPUT = {
@@ -10,7 +11,8 @@ const INPUT = {
     PASSWORD: /^.{4,12}$/, // 4 a 12 digitos.
     NOMBRE_PERSONA: /^[a-zA-ZÑñ ]{2,30}$/,
     // CI: /^\d{7,10}$/,
-    CI: /^[0-9-]{6,12}$/, 
+    CI:/^\d{5,10}((\s|[-])\d{1}[A-Z]{1})?$/, 
+    PLACA: /^\d{3,5}[-][A-Z]{3}?$/,
     DIRECCION: /^.{4,200}$/,
     CLASIFICACION: /^.{4,200}$/,
     SEGURO: /^[a-zA-ZÑñ ]{2,50}$/,
@@ -29,7 +31,7 @@ const INPUT = {
     TEXT: /^.{1,200}$/,
     NUMEROS: /^-?\d+([.]\d+)?(?:[Ee][-+]?\d+)?$/,   // /^[0-9]+([.][0-9]+)?$/,  //NUMEROS ENTEROS MAS NUMEROS REALES, negativos, mas notacion cientifica (ej: 1.2e+05)   /^-?\d+([.]\d+)?(?:[Ee][-+]?\d+)?$/ 
     NUMEROS_PN: /^-?\d*(\.\d+)?$/,   // /^[0-9]+([.][0-9]+)?$/,  //NUMEROS ENTEROS MAS NUMEROS REALES, negativos, mas notacion cientifica (ej: 1.2e+05)   /^-?\d+([.]\d+)?(?:[Ee][-+]?\d+)?$/ 
-    NUMEROS_P:  /^[0-9]{1,20}$/,   // /^[0-9]+([.][0-9]+)?$/,  //NUMEROS ENTEROS MAS NUMEROS REALES, negativos, mas notacion cientifica (ej: 1.2e+05)   /^-?\d+([.]\d+)?(?:[Ee][-+]?\d+)?$/ 
+    NUMEROS_P:  /^[0-9]{1,20}$/,   // números enteros positivos 
     CORREO: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/,
     IMG: /.jpg|.jpeg|.png/i,
 }

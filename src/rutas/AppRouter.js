@@ -8,29 +8,9 @@ import PublicRoute from './publicRoute';
 
 // import Nav from '../componentes/home';
 import Usuario from '../componentes/usuario';
-import Clasificacion from '../componentes/clasificacion'
-import Tipo from '../componentes/tipo'
-import Proyecto from '../componentes/proyecto'
-import proveedor from '../componentes/proveedor';
-import Asignacion from '../componentes/asignacion';
-import UsuarioAsignacion from '../componentes/asignacion-usuario';
-import Gastos from '../componentes/gastos';
-import Reportes from '../componentes/reportes'
-import MiPerfil from '../componentes/miPerfil';
-
-
-
-import Registrame from '../componentes/registrarme'
-
-
-
-
-
-import Informaciones from '../componentes/informacion'
+import Vehiculo from '../componentes/vehiculo';
 
 import { useEffect } from "react";
-
-
 import E500 from './e500'
 
 import useAuth from "../Auth/useAuth";
@@ -85,23 +65,8 @@ export default function AppRouter() {
 
         <Switch>
           <PublicRoute exact path="/" component={Formulario} />
-          <PublicRoute exact path="/registrame" component={Registrame} />
-
           <Check exact path='/usuarios' component={Usuario} />
-          <Check exact path='/tipo' component={Tipo} />
-          <Check exact path='/clasificacion' component={Clasificacion} />
-          <Check exact path='/proyecto' component={Proyecto} />
-          <Check exact path='/proveedor' component={proveedor} />
-          <Check exact path='/asignacion-usuario' component={UsuarioAsignacion} />
-          <Check exact path='/asignaciones' component={Asignacion} />
-          <Check exact path='/gastos' component={Gastos} />
-          <Check exact path='/reportes' component={Reportes} />
-
-
-          <Check exact path='/miPerfil' component={MiPerfil} />
-          <Check exact path='/informacion' component={Informaciones} />
-
-
+          <Check exact path='/vehiculo' component={Vehiculo} />
           <Route exact path="*" component={E500} />
 
         </Switch>

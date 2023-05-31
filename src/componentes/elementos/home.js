@@ -129,9 +129,9 @@ function Home() {
 
 
                                             <li key="uniqsueId7gt" className="nav-item ">
-                                                <Link to='/proveedor' className="nav-link">
+                                                <Link to='/vehiculo' className="nav-link">
                                                     <FontAwesomeIcon icon={faUserFriends} className='nav-icon'></FontAwesomeIcon>
-                                                    <p className="ml-2">Proveedor</p>
+                                                    <p className="ml-2">Vehiculo</p>
                                                 </Link>
                                             </li>
 
@@ -180,10 +180,10 @@ function Home() {
                                         </li>
 
 
-                                        <li key="uniqsueId7gt1" className="nav-item ">
-                                            <Link to='/proveedor' className="nav-link">
+                                        <li key="uniqsueId7gt" className="nav-item ">
+                                            <Link to='/vehiculo' className="nav-link">
                                                 <FontAwesomeIcon icon={faUserFriends} className='nav-icon'></FontAwesomeIcon>
-                                                <p>Proveedor</p>
+                                                <p className="ml-2">Vehiculo</p>
                                             </Link>
                                         </li>
 
@@ -211,10 +211,16 @@ function Home() {
                                                 <p className="ml-2">Clasificación</p>
                                             </Link>
                                         </li>
-                                        <li key="uniqsueId7gt1" className="nav-item ">
-                                            <Link to='/proveedor' className="nav-link">
-                                                <FontAwesomeIcon icon={faUserFriends} className='nav-icon '></FontAwesomeIcon>
-                                                <p className="ml-2">Proveedor</p>
+                                        <li key="uniqsueId7gt" className="nav-item ">
+                                            <Link to='/vehiculo' className="nav-link">
+                                                <FontAwesomeIcon icon={faUserFriends} className='nav-icon'></FontAwesomeIcon>
+                                                <p className="ml-2">Vehiculo</p>
+                                            </Link>
+                                        </li>
+                                        <li key="uniqueId1s0" className="nav-item">
+                                            <Link to='/usuarios' className="nav-link">
+                                                <FontAwesomeIcon icon={faUserFriends} className='nav-icon'></FontAwesomeIcon>
+                                                <p className="ml-2">Gestionar Usuarios</p>
                                             </Link>
                                         </li>
                                     </div>
@@ -234,9 +240,15 @@ function Home() {
                                             </Link>
                                         </li>
                                         <li key="uniqsueId7gt" className="nav-item ">
-                                            <Link to='/proveedor' className="nav-link">
+                                            <Link to='/vehiculo' className="nav-link">
                                                 <FontAwesomeIcon icon={faUserFriends} className='nav-icon'></FontAwesomeIcon>
-                                                <p >Proveedor</p>
+                                                <p className="ml-2">Vehiculo</p>
+                                            </Link>
+                                        </li>
+                                        <li key="uniqueId1s0" className="nav-item">
+                                            <Link to='/usuarios' className="nav-link">
+                                                <FontAwesomeIcon icon={faUserFriends} className='nav-icon'></FontAwesomeIcon>
+                                                <p className="ml-2">Gestionar Usuarios</p>
                                             </Link>
                                         </li>
                                     </>

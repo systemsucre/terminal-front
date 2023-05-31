@@ -2,13 +2,13 @@ import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const colores = {
-    bordes: "#17a2b8",
+    bordes: "#3b5998",
     error: "#dc3545",
     texto: 'rgb(238, 131, 131)',
-    exito: '#17a2b8',
+    exito: '#3b5998',
     // "#28a745",
     encabezado: "#006572",
-    borde: "#6c757d"
+    borde: "#3b5998"
 }
 
 const grupoInput = styled.div`
@@ -42,8 +42,7 @@ const InputBuscador = styled.input`
 const Input = styled.input` 
 
     width:100%;
-    height: 20px;
-    font-size: 10px;
+    font-size: 12px;
     padding: 0px 5px 0px 5px;  //campos donde va abarcar el texto dentro del input
     margin-bottom: 0px;   
     transition: .3s ease all;
@@ -149,8 +148,7 @@ const InputDisabled = styled.input`
 
 
     width:100%;
-    height: 10px;
-    font-size: 10px;
+    font-size: 12px;
     padding: 0 0px 0 2px;  //campos donde va abarcar el texto dentro del input
     transition: .3s ease all;
     border: 1px solid ${colores.borde};
@@ -300,9 +298,7 @@ const Parrafos = styled.p`
 
 const SelectStyle = styled.select`
     width:100%;
-    height: 10px;
-    font-size: 10px;
-  //  padding: 0 5px 0 5px;  //campos donde va abarcar el texto dentro del input
+    font-size: 14px;
     padding: 0 5px 0 5px;  //campos donde va abarcar el texto dentro del input
     transition: .3s ease all;
     border: 1px solid ${colores.borde};

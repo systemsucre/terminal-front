@@ -9,12 +9,15 @@ export default function PublicRoute({ component: Component, ...rest }) {
     let url = null
 
     if (parseInt(localStorage.getItem('numRol')) === 1) {
-        url = "/asignacion-usuario"
+        url = "/usuarios"
     }
 
-// usuario general
+    // usuario general
     if (parseInt(localStorage.getItem('numRol')) === 2) {
-        url = "/gastos"
+        url = "/usuarios"
+    }
+    if (parseInt(localStorage.getItem('numRol')) === 3) {
+        url = "/usuarios"
     }
 
 
