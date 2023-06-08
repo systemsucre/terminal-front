@@ -35,12 +35,15 @@ function Vehiculo() {
     const [modalVer, setModalVer] = useState(false)
     const [modalRegistrar, setModalRegisttar] = useState(false)
     const [modalActualizar, setModalActualizar] = useState(false)
+    const [modalReconfigurar, setModalReconfigurar] = useState(false)
 
 
     const [eliminado, seteliminado] = useState(false)
     const [enviado, setEnviado] = useState(0)
-    const [infoModal, setInfoModal] = useState(null)
-    const [infoModalDatos, setInfoModalDatos] = useState(null)
+    const [encargado, setEncargado] = useState(null)
+    const [placaM, setPlacaM] = useState(null)
+    const [tipoM, setTipoM] = useState(null)
+    const [capacidadM, setCapacidadM] = useState(null)
 
 
     const [idUsuario, setIdUssuario] = useState({ campo: '', valido: null })
@@ -162,8 +165,12 @@ function Vehiculo() {
         const verVehiculo = (id) => {
             axios.post(URL + '/vehiculo/ver', { id: id }).then(json => {
                 if (json.data.ok) {
+                    console.log(json.data.data[0][0])
                     setVehiculo(json.data.data[0])
                     setAsiento(json.data.data[1])
+                    setPlacaM(json.data.data[0][0].placa)
+                    setCapacidadM(json.data.data[0][0].capacidad)
+                    setTipoM(json.data.data[0][0].tipo)
                     setModalVer(true)
                     setIdTipo({ campo: json.data.data[0].idTipo, valido: 'true' });
                     setId({ campo: json.data.data[0].id, valido: 'true' })
@@ -205,6 +212,16 @@ function Vehiculo() {
             setModalActualizar(true)
         }
 
+        const rellenarReconfigurar = async () => {
+            let ok = window.confirm('LUEGO DE RECONFIGURAR TENDRA QUE VOLVER A REGISTRAR LOS ASIENTOS, Desea reconfigurar este vehículo ?')
+            if (ok) {
+                listarTipoPersonal()
+                setId({ campo: vehiculo[0].id, valido: 'true' })
+                setIdTipo({ campo: vehiculo[0].idtipo, valido: 'true' })
+                setModalReconfigurar(true)
+            }
+        }
+
         // para registrar el vehiculo se comprueba que la capacidad este dentro de los parametros establecidos en la bd
         const registrar = async () => {
             if (idTipo.valido === 'true' && idUsuario.valido === 'true' &&
@@ -234,7 +251,7 @@ function Vehiculo() {
 
 
         const actualizar = async () => {
-            if (id.valido === 'true' && idTipo.valido === 'true' && idUsuario.valido === 'true' &&
+            if (id.valido === 'true' && idUsuario.valido === 'true' &&
                 placa.valido === 'true' && modelo.valido === 'true' && enviado == 0) {
 
                 setEnviado(1)
@@ -243,7 +260,6 @@ function Vehiculo() {
                 let fecha = today.toISOString().split('T')[0]
                 axios.post(URL + '/vehiculo/actualizar', {
                     id: id.campo,
-                    idtipo: idTipo.campo,
                     idusuario: idUsuario.campo,
                     placa: placa.campo,
                     modelo: modelo.campo,
@@ -252,8 +268,37 @@ function Vehiculo() {
                     if (json.data.ok) {
                         setVehiculo(json.data.data[0])
                         setAsiento(json.data.data[1])
+                        setPlacaM(json.data.data[0][0].placa)
+                        setCapacidad(json.data.data[0][0].capacidad)
+                        setTipoM(json.data.data[0][0].tipo)
                         toast.success(json.data.msg)
                         setModalActualizar(false)
+                        vaciarDatos()
+                    } else { toast.error(json.data.msg); setEnviado(0) }
+                })
+
+            } else toast.error('Complete todos los campos requeridos en el formulario')
+        }
+
+
+        const reConfigurar = async () => {
+            if (id.valido === 'true' && idTipo.valido === 'true' && enviado == 0) {
+                setEnviado(1)
+                let today = new Date()
+                let fecha = today.toISOString().split('T')[0]
+                axios.post(URL + '/vehiculo/re-configurar', {
+                    idvehiculo: id.campo,
+                    idtipo: idTipo.campo,
+                    modificado: fecha + ' ' + new Date().toLocaleTimeString()
+                }).then(json => {
+                    if (json.data.ok) {
+                        setVehiculo(json.data.data[0])
+                        setAsiento(json.data.data[1])
+                        setPlacaM(json.data.data[0][0].placa)
+                        setCapacidad(json.data.data[0][0].capacidad)
+                        setTipoM(json.data.data[0][0].tipo)
+                        toast.success(json.data.msg)
+                        setModalReconfigurar(false)
                         vaciarDatos()
                     } else { toast.error(json.data.msg); setEnviado(0) }
                 })
@@ -366,8 +411,8 @@ function Vehiculo() {
                                             <div className='row'>
                                                 {eliminado === false && <>
                                                     <div className='btn-nuevo col-auto mb-2' onClick={() => { listarTipoPersonal(); setModalRegisttar(true) }}>Registrar Vehículo</div>
-                                                    <div className="btn-cerrar-ventana col-auto " onClick={() => { listarReciclaje(); setInputBuscar({ campo: null, valido: null }); seteliminado(true) }} >
-                                                        Ver Inactivos</div>
+                                                    {/* <div className="btn-cerrar-ventana col-auto " onClick={() => { listarReciclaje(); setInputBuscar({ campo: null, valido: null }); seteliminado(true) }} >
+                                                        Ver Inactivos</div> */}
                                                 </>
                                                 }
                                                 {eliminado === true &&
@@ -409,23 +454,19 @@ function Vehiculo() {
                                                     <tbody>
 
                                                         {lista.map((u) => (
-                                                            <>
-                                                                <tr key={u.id} className='item'>
+                                                            <tr key={u.id} className='item'>
 
-                                                                    <td className="col-1 ">{u.tipo}</td>
-                                                                    <td className="col-2 ">{u.encargado}</td>
-                                                                    <td className="col-1 ">{u.empresa}</td>
-                                                                    <td className="col-1  ">{u.capacidad}</td>
-                                                                    <td className="col-1  ">{u.placa}</td>
-                                                                    <td className="col-1  ">{u.modelo}</td>
-                                                                    {u.eliminado === 0 ? <td className="col-1  ">DISPONIBLE</td> : <td className="col-1  ">NO DISPONIBLE</td>}
-                                                                    <td className="col-1  " onClick={() => {
-                                                                        verVehiculo(u.id);
-                                                                        setInfoModal('ENC. ' + u.encargado);
-                                                                        setInfoModalDatos('TIPO MOV. ' + u.tipo + '    CAP. ' + u.capacidad + ' Pasajeros')
-                                                                    }}> <span className='btn-ver-usuario' >Ver vehiculo</span></td>
-                                                                </tr>
-                                                            </>
+                                                                <td className="col-1 ">{u.tipo}</td>
+                                                                <td className="col-2 ">{u.encargado}</td>
+                                                                <td className="col-1 ">{u.empresa}</td>
+                                                                <td className="col-1  ">{u.capacidad}</td>
+                                                                <td className="col-1  ">{u.placa}</td>
+                                                                <td className="col-1  ">{u.modelo}</td>
+                                                                {u.eliminado === 0 ? <td className="col-1  ">DISPONIBLE</td> : <td className="col-1  ">NO DISPONIBLE</td>}
+                                                                <td className="col-1  " onClick={() => {
+                                                                    verVehiculo(u.id); setEncargado(u.encargado)
+                                                                }}> <span className='btn-ver-usuario' >Ver vehiculo</span></td>
+                                                            </tr>
                                                         ))}
 
                                                     </tbody>
@@ -456,8 +497,10 @@ function Vehiculo() {
                                     </div>
 
                                     <Modal isOpen={modalVer}>
-                                        <div className='title-page-asientos' style={{fontSize:'18px'}} >
-                                            {infoModalDatos}
+                                        <div className='title-page-asientos' style={{ fontSize: '18px' }} >
+                                            {/* {infoModalDatos} */}
+                                            Configuracion Vehículo
+
                                         </div>
                                         <ModalBody>
                                             {vehiculo.length > 0 &&
@@ -465,41 +508,36 @@ function Vehiculo() {
 
                                                     {vehiculo[0].numero === 1 &&
                                                         <>
-                                                            <p style={{ marginBottom: '0px !important' }} className='text-left'>{infoModal}</p>
-                                                            <Taxi modelo={asiento} registrar={registrarAsiento} eliminar={eliminarAsiento} />
+                                                            <Taxi modelo={asiento} registrar={registrarAsiento} eliminar={eliminarAsiento} placa={placaM} tipo={tipoM} capacidad={capacidadM} encargado={encargado} />
 
                                                         </>
                                                     }
                                                     {vehiculo[0].numero === 2 &&
                                                         <>
-                                                            <p style={{ marginBottom: '0px !important' }} className='text-left'>{infoModal}</p>
-                                                            <Surubi modelo={asiento} registrar={registrarAsiento} eliminar={eliminarAsiento} />
+                                                            <Surubi modelo={asiento} registrar={registrarAsiento} eliminar={eliminarAsiento} placa={placaM} tipo={tipoM} capacidad={capacidadM} encargado={encargado} />
 
                                                         </>
                                                     }
                                                     {vehiculo[0].numero === 3 &&
                                                         <>
-                                                            <p style={{ marginBottom: '0px !important' }} className='text-left'>{infoModal}</p>
-                                                            <MinibusCuatroFilas modelo={asiento} registrar={registrarAsiento} eliminar={eliminarAsiento} />
+                                                            <MinibusCuatroFilas modelo={asiento} registrar={registrarAsiento} eliminar={eliminarAsiento} placa={placaM} tipo={tipoM} capacidad={capacidadM} encargado={encargado} />
 
                                                         </>
                                                     }
 
                                                     {vehiculo[0].numero === 4 &&
                                                         <>
-                                                            <p style={{ marginBottom: '0px !important' }} className='text-left'>{infoModal}</p>
-                                                            <MinibusCincoFilas modelo={asiento} registrar={registrarAsiento} eliminar={eliminarAsiento} />
+                                                            <MinibusCincoFilas modelo={asiento} registrar={registrarAsiento} eliminar={eliminarAsiento} placa={placaM} tipo={tipoM} capacidad={capacidadM} encargado={encargado} />
 
                                                         </>
                                                     }
-                                                       {vehiculo[0].numero === 5 &&
+                                                    {vehiculo[0].numero === 5 &&
                                                         <>
-                                                            <p style={{ marginBottom: '0px !important' }} className='text-left'>{infoModal}</p>
-                                                            <MinibusSeisFilas modelo={asiento} registrar={registrarAsiento} eliminar={eliminarAsiento} />
+                                                            <MinibusSeisFilas modelo={asiento} registrar={registrarAsiento} eliminar={eliminarAsiento} placa={placaM} tipo={tipoM} capacidad={capacidadM} encargado={encargado} />
 
                                                         </>
                                                     }
-                                                    <p className='parrafos-asiento'> Los asientos disponibles estan listos para que el cliente escoja su asiento. Cuando quite este asiento, no estará disponible para el pasajero</p>
+                                                    <p className='parrafos-asiento mt-2'> Los asientos disponibles estan listos para que el cliente escoja su asiento. Cuando quite este asiento, no estará disponible para el pasajero</p>
                                                     <p className='parrafos-asiento'> Los asientos no disponibles no se ven para el usuario, por lo que no se podran vender dicho pasajes </p>
                                                 </div>
                                             }
@@ -518,6 +556,8 @@ function Vehiculo() {
                                                 <div className='btn-cerrar-ventana col-auto' onClick={() => {
                                                     setModalVer(false); listarVehiculos()
                                                 }} > Cerrar ventana</div>
+                                                <div className='btn-nuevo col-auto' onClick={() => { rellenarReconfigurar() }}>Reconfigurar</div>
+
                                                 <div className='btn-nuevo col-auto' onClick={() => { rellenar() }}>Actualizar</div>
                                             </>
                                             }
@@ -611,30 +651,6 @@ function Vehiculo() {
                                             <div className="row">
                                                 <div className='col-6'>
                                                     <Select1
-                                                        estado={idTipo}
-                                                        cambiarEstado={setIdTipo}
-                                                        name="proyecto"
-                                                        ExpresionRegular={INPUT.ID}
-                                                        lista={tipo}
-                                                        etiqueta={'Tipo Vehículo'}
-                                                        msg='Seleccione una opcion'
-                                                        asignar={setCapacidad}
-                                                    >
-                                                    </Select1>
-                                                </div>
-                                                <div className="col-6">
-                                                    <ComponenteInputUserDisabled
-                                                        estado={capacidad}
-                                                        cambiarEstado={setCapacidad}
-                                                        name="placa"
-                                                        placeholder="Placa"
-                                                        ExpresionRegular={INPUT.NUMEROS_P}
-                                                        etiqueta={'Capacidad [Pasajeros]'}
-                                                    />
-                                                </div>
-
-                                                <div className='col-6'>
-                                                    <Select1
                                                         estado={idUsuario}
                                                         cambiarEstado={setIdUssuario}
                                                         name="personal"
@@ -674,7 +690,35 @@ function Vehiculo() {
                                         <div className="row botonModal">
                                             <div className='btn-cerrar-ventana col-auto' onClick={() => setModalActualizar(false)} >Cancelar </div>
                                             <div className='btn-nuevo col-auto' onClick={() => { actualizar() }}>Actualizar</div>
-                                            <div className='btn-eliminar col-auto' onClick={() => eliminar(vehiculo[0].id)} >Desactivar</div>
+                                            <div className='btn-eliminar col-auto' onClick={() => eliminar(vehiculo[0].id)} >Eliminar</div>
+                                        </div>
+                                    </Modal>
+
+                                    <Modal isOpen={modalReconfigurar}>
+
+                                        <div className='title-page' >
+                                            Reconnfigurar vehículo
+                                        </div>
+                                        <ModalBody>
+                                            <div className="row">
+                                                <div className='col-6'>
+                                                    <Select1
+                                                        estado={idTipo}
+                                                        cambiarEstado={setIdTipo}
+                                                        name="proyecto"
+                                                        ExpresionRegular={INPUT.ID}
+                                                        lista={tipo}
+                                                        etiqueta={'Tipo Vehículo'}
+                                                        msg='Seleccione una opcion'
+                                                        asignar={setCapacidad}
+                                                    >
+                                                    </Select1>
+                                                </div>
+                                            </div>
+                                        </ModalBody>
+                                        <div className="row botonModal">
+                                            <div className='btn-cerrar-ventana col-auto' onClick={() => setModalReconfigurar(false)} >Cancelar </div>
+                                            <div className='btn-nuevo col-auto' onClick={() => { reConfigurar() }}>Configurar</div>
                                         </div>
                                     </Modal>
 

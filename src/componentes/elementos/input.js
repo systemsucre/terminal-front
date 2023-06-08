@@ -107,7 +107,7 @@ const Select2_ = ({ estado, cambiarEstado, Name, ExpresionRegular, lista, funcio
 }
 
 
-const Select1 = ({ estado, cambiarEstado, Name, ExpresionRegular, lista, nombre = null, funcion, etiqueta, msg, asignar }) => {
+const Select1 = ({ estado, cambiarEstado, Name, ExpresionRegular, lista, nombre = null, funcion, etiqueta, msg, asignar = null, lugares = null }) => {
     const [mensaje, setMensaje] = useState(null)
     useEffect(() => {
         setTimeout(() => {
@@ -115,25 +115,32 @@ const Select1 = ({ estado, cambiarEstado, Name, ExpresionRegular, lista, nombre 
         }, 10000)
     }, [mensaje])
 
-    // console.log(estado)
     const onChange = (e) => {
-        cambiarEstado({ campo: parseInt(e.target.value), valido: 'true' })
-        // console.log(estado.campo)
+        cambiarEstado({ campo: parseInt(e.target.value), valido: 'true' });
     }
     const validacion = () => {
         if (ExpresionRegular) {
-            if (ExpresionRegular.test(estado.campo)) {
+            if (ExpresionRegular.test(estado.campo) && estado.campo != 'Seleccionar') {
                 cambiarEstado({ ...estado, valido: 'true' })  //el valor del campo valido, debe ser una cadena 
                 if (funcion) {
                     funcion()
                 }
-                lista.forEach(e => {
-                    if (estado.campo == e.id)
-                        asignar({ campo: e.capacidad, valido: 'true' })
-                })
+                if (asignar) {
+                    lista.forEach(e => {
+                        if (estado.campo == e.id)
+                            asignar({ campo: e.capacidad, valido: 'true' })
+                    })
+                }
+
+                // cuando los lugares origen y destino son iguales
+                if (lugares) {
+                    if (lugares === estado.campo) {
+                        alert('Ops!, no puedes elegir el mismo lugar en el destino')
+                        cambiarEstado({ valido: 'false' })
+                    }
+                }
                 setMensaje(null)
 
-                // nombre(lista[estado.campo].nombre)
             }
             else {
                 cambiarEstado({ ...estado, valido: 'false' })
@@ -152,6 +159,92 @@ const Select1 = ({ estado, cambiarEstado, Name, ExpresionRegular, lista, nombre 
 
         })
     }
+
+
+    return (
+        <div >
+            <div className="field">
+                <label>  {etiqueta + '   *  '}
+
+                    <SelectStyle
+                        name={Name}
+                        className="form-control form-control-sm"
+                        onChange={onChange}
+                        // onKeyUp={validacion} //se ejecuta cuando dejamos de presionar la tecla
+                        // onBlur={validacion}  //si presionamos fuera del input
+                        valido={estado.valido}
+                        value={estado.campo || ''}
+                        onClick={validacion}
+                    >
+                        <option>Seleccionar</option>
+
+                        {lista.map((r) => (
+
+                            <option key={r.id} value={r.id}>{r.nombre}</option>
+                        ))}
+                    </SelectStyle>
+                    <LeyendaError>{mensaje}</LeyendaError>
+                </label>
+            </div>
+        </div>
+    )
+}
+
+
+const SelectString = ({ estado, cambiarEstado, Name, ExpresionRegular, lista, nombre = null, funcion, etiqueta, msg, asignar = null, lugares = null }) => {
+    const [mensaje, setMensaje] = useState(null)
+    useEffect(() => {
+        setTimeout(() => {
+            setMensaje(null)
+        }, 10000)
+    }, [mensaje])
+
+    const onChange = (e) => {
+        cambiarEstado({ campo: e.target.value, valido: 'true' })
+    }
+    const validacion = () => {
+        if (ExpresionRegular) {
+            if (ExpresionRegular.test(estado.campo) && estado.campo != 'Seleccionar') {
+                cambiarEstado({ ...estado, valido: 'true' })  //el valor del campo valido, debe ser una cadena 
+                if (funcion) {
+                    funcion()
+                }
+                if (asignar) {
+                    lista.forEach(e => {
+                        if (estado.campo == e.id)
+                            asignar({ campo: e.capacidad, valido: 'true' })
+                    })
+                }
+
+                // cuando los lugares origen y destino son iguales
+                if (lugares) {
+                    if (lugares === estado.campo) {
+                        alert('Ops!, no puedes elegir el mismo lugar en el destino')
+                        cambiarEstado({ valido: 'false' })
+                    }
+                }
+                setMensaje(null)
+
+            }
+            else {
+                cambiarEstado({ ...estado, valido: 'false' })
+                setMensaje(msg)
+            }
+        }
+    }
+
+    if (nombre) {
+        lista.forEach(e => {
+            // console.log(e, estado, 'nombre asignados sin el if')
+            if (e.id == estado.campo) {
+                // console.log(e, estado, 'asignado con if')
+                nombre(e.nombre)
+            }
+
+        })
+    }
+
+
     return (
         <div >
             <div className="field">
@@ -1007,7 +1100,7 @@ const Footer = () => {
 export {
     InputUsuario,
     ComponenteInputUser,
-    Select1, Select2_,
+    Select1, Select2_, SelectString,
 
     ComponenteInputFile,
     GenerarPdf,

@@ -1,6 +1,6 @@
 
 
-function Taxi({ modelo, registrar, eliminar }) {
+function Taxi({ modelo, registrar, eliminar, placa, tipo, capacidad, encargado }) {
 
     const filas = [1, 2]
     let asiento = []
@@ -35,14 +35,18 @@ function Taxi({ modelo, registrar, eliminar }) {
             <div className="col-6">
                 <div className="row item-center">
                     <div className="col-1 disponible"></div>
-                    <div className="col-10 "><p className="pt-3">Asiento disponible</p></div>
+                    <div className="col-10 "><p className="parrafos-asiento">Asiento registrado</p></div>
                 </div>
                 <div className="row item-center">
                     <div className="col-1 no-disponible"></div>
-                    <div className="col-10 "><p className="pt-3">Asiento no disponible</p></div>
+                    <div className="col-10 "><p className="parrafos-asiento">Asiento no registrado</p></div>
                 </div>
                 <div className="row image-taxi">
                 </div>
+                <p className="descripcion-vehiculo">{'ENCARGADO : '+encargado}</p>
+                <p className="descripcion-vehiculo">{'TIPO : '+tipo}</p>
+                <p className="descripcion-vehiculo">{'CAPACIDAD : '+ capacidad}</p>
+                <p className="descripcion-vehiculo">{'PLACA DE CONTROL : '+placa}</p>
             </div>
         </div>
 
@@ -51,7 +55,7 @@ function Taxi({ modelo, registrar, eliminar }) {
 }
 
 
-function Surubi({ modelo, registrar, eliminar }) {
+function Surubi({ modelo, registrar, eliminar , placa, tipo, capacidad, encargado}) {
 
     const filas = [1, 2]
     let asiento = []
@@ -87,14 +91,18 @@ function Surubi({ modelo, registrar, eliminar }) {
             <div className="col-6">
                 <div className="row item-center">
                     <div className="col-1 disponible"></div>
-                    <div className="col-10 "><p className="pt-3">Asiento disponible</p></div>
+                    <div className="col-10 "><p className="parrafos-asiento">Asiento registrado</p></div>
                 </div>
                 <div className="row item-center">
                     <div className="col-1 no-disponible"></div>
-                    <div className="col-10 "><p className="pt-3">Asiento no disponible</p></div>
+                    <div className="col-10 "><p className="parrafos-asiento">Asiento no registrado</p></div>
                 </div>
                 <div className="row image-surubi">
                 </div>
+                <p className="descripcion-vehiculo">{'ENCARGADO : '+encargado}</p>
+                <p className="descripcion-vehiculo">{'TIPO : '+tipo}</p>
+                <p className="descripcion-vehiculo">{'CAPACIDAD : '+ capacidad}</p>
+                <p className="descripcion-vehiculo">{'PLACA DE CONTROL : '+placa}</p>
             </div>
         </div>
 
@@ -104,7 +112,7 @@ function Surubi({ modelo, registrar, eliminar }) {
 
 
 
-function MinibusCuatroFilas({ modelo, registrar, eliminar }) {
+function MinibusCuatroFilas({ modelo, registrar, eliminar, placa, tipo, capacidad, encargado }) {
 
     const filas = [1, 2]
     let asiento = []
@@ -151,14 +159,18 @@ function MinibusCuatroFilas({ modelo, registrar, eliminar }) {
             <div className="col-7">
                 <div className="row item-center">
                     <div className="col-1 disponible"></div>
-                    <div className="col-10 "><p className="pt-3">Asiento disponible</p></div>
+                    <div className="col-10 "><p className="parrafos-asiento">Asiento registrado</p></div>
                 </div>
                 <div className="row item-center">
                     <div className="col-1 no-disponible"></div>
-                    <div className="col-10 "><p className="pt-3">Asiento no disponible</p></div>
+                    <div className="col-10 "><p className="parrafos-asiento">Asiento no registrado</p></div>
                 </div>
                 <div className="row image-minibus">
                 </div>
+                <p className="descripcion-vehiculo">{'ENCARGADO : '+encargado}</p>
+                <p className="descripcion-vehiculo">{'TIPO : '+tipo}</p>
+                <p className="descripcion-vehiculo">{'CAPACIDAD : '+ capacidad}</p>
+                <p className="descripcion-vehiculo">{'PLACA DE CONTROL : '+placa}</p>
             </div>
         </div>
 
@@ -167,7 +179,7 @@ function MinibusCuatroFilas({ modelo, registrar, eliminar }) {
 }
 
 
-function MinibusCincoFilas({ modelo, registrar, eliminar }) {
+function MinibusCincoFilas({ modelo, registrar, eliminar , placa, tipo, capacidad, encargado}) {
 
     const filas = [1, 2]
     let asiento = []
@@ -222,14 +234,18 @@ function MinibusCincoFilas({ modelo, registrar, eliminar }) {
             <div className="col-7">
                 <div className="row item-center">
                     <div className="col-1 disponible"></div>
-                    <div className="col-10 "><p className="pt-3">Asiento disponible</p></div>
+                    <div className="col-10 "><p className="parrafos-asiento">Asiento registrado</p></div>
                 </div>
                 <div className="row item-center">
                     <div className="col-1 no-disponible"></div>
-                    <div className="col-10 "><p className="pt-3">Asiento no disponible</p></div>
+                    <div className="col-10 "><p className="parrafos-asiento">Asiento no registrado</p></div>
                 </div>
-                <div className="image-minibus-largo">
+                <div className="row image-minibus-largo">
                 </div>
+                <p className="descripcion-vehiculo">{'ENCARGADO : '+encargado}</p>
+                <p className="descripcion-vehiculo">{'TIPO : '+tipo}</p>
+                <p className="descripcion-vehiculo">{'CAPACIDAD : '+ capacidad}</p>
+                <p className="descripcion-vehiculo">{'PLACA DE CONTROL : '+placa}</p>
             </div>
         </div>
 
@@ -239,7 +255,7 @@ function MinibusCincoFilas({ modelo, registrar, eliminar }) {
 
 
 
-function MinibusSeisFilas({ modelo, registrar, eliminar }) {
+function MinibusSeisFilas({ modelo, registrar, eliminar , placa, tipo, capacidad, encargado}) {
 
     const filas = [1, 2]
     let asiento = []
@@ -301,14 +317,18 @@ function MinibusSeisFilas({ modelo, registrar, eliminar }) {
             <div className="col-7">
                 <div className="row item-center">
                     <div className="col-1 disponible"></div>
-                    <div className="col-10 "><p className="pt-3">Asiento disponible</p></div>
+                    <div className="col-10 "><p className="parrafos-asiento">Asiento registrado</p></div>
                 </div>
                 <div className="row item-center">
                     <div className="col-1 no-disponible"></div>
-                    <div className="col-10 "><p className="pt-3">Asiento no disponible</p></div>
+                    <div className="col-10 "><p className="parrafos-asiento">Asiento no registrado</p></div>
                 </div>
-                <div className="image-minibus-largo">
+                <div className="row image-minibus-largo">
                 </div>
+                <p className="descripcion-vehiculo">{'ENCARGADO : '+encargado}</p>
+                <p className="descripcion-vehiculo">{'TIPO : '+tipo}</p>
+                <p className="descripcion-vehiculo">{'CAPACIDAD : '+ capacidad}</p>
+                <p className="descripcion-vehiculo">{'PLACA DE CONTROL : '+placa}</p>
             </div>
         </div>
 

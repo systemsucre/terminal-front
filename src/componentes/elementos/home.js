@@ -200,15 +200,15 @@ function Home() {
 
                                     {parseInt(localStorage.getItem('numRol')) === 2 && tam < 700 && < div data-widget="pushmenu" role="button">
                                         <li key="uniqueId101" className="nav-item">
-                                            <Link to='/gastos' className="nav-link">
+                                            <Link to='/viajes' className="nav-link">
                                                 <FontAwesomeIcon icon={faDollarSign} className='nav-icon'></FontAwesomeIcon>
-                                                <p className="ml-2">Gastos</p>
+                                                <p className="ml-2">Viajes</p>
                                             </Link>
                                         </li>
                                         <li key="uniquseId71" className="nav-item ">
-                                            <Link to='/clasificacion' className="nav-link">
+                                            <Link to='/rutas' className="nav-link">
                                                 <FontAwesomeIcon icon={faHouseUser} className='nav-icon'></FontAwesomeIcon>
-                                                <p className="ml-2">Clasificación</p>
+                                                <p className="ml-2">Rutas</p>
                                             </Link>
                                         </li>
                                         <li key="uniqsueId7gt" className="nav-item ">
@@ -228,15 +228,15 @@ function Home() {
 
                                     {parseInt(localStorage.getItem('numRol')) === 2 && tam >= 700 && <>
                                         <li key="uniqueId10vff" className="nav-item">
-                                            <Link to='/gastos' className="nav-link">
+                                            <Link to='/viajes' className="nav-link">
                                                 <FontAwesomeIcon icon={faDollarSign} className='nav-icon'></FontAwesomeIcon>
-                                                <p>Gastos</p>
+                                                <p>Viajes</p>
                                             </Link>
                                         </li>
                                         <li key="uniquseId7" className="nav-item ">
-                                            <Link to='/clasificacion' className="nav-link">
+                                            <Link to='/rutas' className="nav-link">
                                                 <FontAwesomeIcon icon={faHouseUser} className='nav-icon'></FontAwesomeIcon>
-                                                <p>Clasificación</p>
+                                                <p>Rutas</p>
                                             </Link>
                                         </li>
                                         <li key="uniqsueId7gt" className="nav-item ">

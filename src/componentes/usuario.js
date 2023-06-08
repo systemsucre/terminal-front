@@ -358,17 +358,17 @@ function Usuario() {
             principal.getCell('B5').value = 'Esta es una celda convinada para mostrar todas la tareas del usaurio';
             // expect(principal.getCell('B5').value).toBe(principal.getCell('A4').value);
             // expect(principal.getCell('B5').master).toBe(principal.getCell('A4'));
-            for( let i=0; i<8; i++){
-                principal.addRow([, , ]);
+            for (let i = 0; i < 8; i++) {
+                principal.addRow([, ,]);
 
             }
 
             principal.columns = [
                 { header: 'Id', key: 'id', width: 10 },
                 { header: 'Name', key: 'name', width: 32 },
-                { header: 'D.O.B.', key: 'DOB', width: 10, outlineLevel: 1 }, {origin:'A6'}
+                { header: 'D.O.B.', key: 'DOB', width: 10, outlineLevel: 1 }, { origin: 'A6' }
             ];
-            for( let i=0; i<50; i++){
+            for (let i = 0; i < 50; i++) {
                 principal.addRow([3, 'Sam', '12,12,1990']);
 
             }
@@ -391,9 +391,9 @@ function Usuario() {
             // };
 
 
-            workbook.xlsx.writeBuffer().then(data=>{
-                const blob = new Blob([data],{
-                    type:"aplication/vnd.openxmlformats-officedocumets.spreadshhed.sheed",
+            workbook.xlsx.writeBuffer().then(data => {
+                const blob = new Blob([data], {
+                    type: "aplication/vnd.openxmlformats-officedocumets.spreadshhed.sheed",
                 });
                 const url = window.URL.createObjectURL(blob);
                 const anchor = document.createElement('a');
@@ -472,18 +472,16 @@ function Usuario() {
                                                     <tbody>
 
                                                         {lista.map((u) => (
-                                                            <>
-                                                                <tr key={u.id} className='item'>
+                                                            <tr key={u.id} className='item'>
 
-                                                                    <td className="col-1 ">{u.ci}</td>
-                                                                    <td className="col-2 ">{u.nombre + ' ' + u.apellido1 + ' ' + u.apellido2}</td>
+                                                                <td className="col-1 ">{u.ci}</td>
+                                                                <td className="col-2 ">{u.nombre + ' ' + u.apellido1 + ' ' + u.apellido2}</td>
 
-                                                                    <td className="col-1  ">{u.username}</td>
-                                                                    <td className="col-1  ">{u.celular}</td>
-                                                                    <td className="col-2  ">{u.direccion}</td>
-                                                                    <td className="col-1  " onClick={() => verUsuario(u.id)}> <span className='btn-ver-usuario' >Ver usuario</span></td>
-                                                                </tr>
-                                                            </>
+                                                                <td className="col-1  ">{u.username}</td>
+                                                                <td className="col-1  ">{u.celular}</td>
+                                                                <td className="col-2  ">{u.direccion}</td>
+                                                                <td className="col-1  " onClick={() => verUsuario(u.id)}> <span className='btn-ver-usuario' >Ver usuario</span></td>
+                                                            </tr>
                                                         ))}
 
                                                     </tbody>

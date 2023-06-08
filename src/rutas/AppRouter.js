@@ -9,6 +9,8 @@ import PublicRoute from './publicRoute';
 // import Nav from '../componentes/home';
 import Usuario from '../componentes/usuario';
 import Vehiculo from '../componentes/vehiculo';
+import Rutas from '../componentes/rutas';
+import Viajes from '../componentes/viajes';
 
 import { useEffect } from "react";
 import E500 from './e500'
@@ -67,6 +69,8 @@ export default function AppRouter() {
           <PublicRoute exact path="/" component={Formulario} />
           <Check exact path='/usuarios' component={Usuario} />
           <Check exact path='/vehiculo' component={Vehiculo} />
+          <Check exact path='/rutas' component={Rutas} />
+          <Check exact path='/viajes' component={Viajes} />
           <Route exact path="*" component={E500} />
 
         </Switch>

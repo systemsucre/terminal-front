@@ -13,7 +13,7 @@ const INPUT = {
     // CI: /^\d{7,10}$/,
     CI:/^\d{5,10}((\s|[-])\d{1}[A-Z]{1})?$/, 
     PLACA: /^\d{3,5}[-][A-Z]{3}?$/,
-    DIRECCION: /^.{4,200}$/,
+    DIRECCION: /^[a-zA-ZÑñ /0-9-@+]{2,30}$/,
     CLASIFICACION: /^.{4,200}$/,
     SEGURO: /^[a-zA-ZÑñ ]{2,50}$/,
     CODIGO: /^[-_a-zA-ZÑñ0-9 ]{2,20}$/,
@@ -22,7 +22,7 @@ const INPUT = {
     ID: /^\d{1,10}$/, // id de redes, 1 a 4 digitos
     FECHA: /\d{4}[-]\d{2}[-]\d{2}/,
     MES: /\d{4}[-]\d{2}/,
-    HORA: /\d{2}[:]\d{2}[:]\d{2}/,
+    HORA: /\d{2}[:]\d{2}/,
     SEXO: /^[FMfm]{1}$/,
     SEXO3: /^[FMfmTt]{1}$/,
     NHC: /^\d{1,10}$/,

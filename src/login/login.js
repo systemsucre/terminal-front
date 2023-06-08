@@ -83,6 +83,7 @@ function Formulario() {
             localStorage.setItem('rol', json.data.rol)
             localStorage.setItem('numRol', json.data.numRol)
             localStorage.setItem('url', window.location.href)
+            localStorage.setItem('minuto', json.data.minuto)
             auth.login('ok')
             toast.success(json.data.msg)
           }
