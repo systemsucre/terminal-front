@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-import { Table, Modal, ModalBody, } from 'reactstrap';
+import { Table, Modal, ModalBody, ModalHeader, Button, } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBusAlt, faCalendar, faHandPointLeft, faHandPointRight, } from '@fortawesome/free-solid-svg-icons';
 
@@ -76,12 +76,11 @@ function Viajes() {
 
             socket.on('listaViajes', (data) => {
                 setLista(data)
-                console.log('ok')
+                // console.log('ok', modalVer, data)
 
                 if (modalVer) {
                     console.log('ok, q')
                     data.forEach(e => {
-
                         if (parseInt(viaje[0].id) === parseInt(e.id)) {
                             verViaje(viaje[0].id)
                             if (modalActualizar === true) { rellenar(); alert2({ icono: 'warning', titulo: 'Actualizado', boton: 'ok', texto: 'Este registro fue actualizado, por otro usuario, Revise la información!' }) }
@@ -91,6 +90,7 @@ function Viajes() {
                 }
 
             })
+            console.log(modalVer)
             socket.on('error', (data) => {
                 alert2({ icono: 'error', titulo: 'Error', boton: 'ok', texto: data })
                 setEnviado(0)
@@ -346,14 +346,14 @@ function Viajes() {
                                                                 <th className="col-2  ">ENCARGADO</th>
                                                                 <th className="col-2  ">VEHICULO</th>
 
-                                                                <th className="col-1  "></th>
+                                                                {/* <th className="col-1  "></th> */}
 
                                                             </tr>
                                                         </thead>
                                                         <tbody>
 
                                                             {lista.map((u, index) => (
-                                                                <tr key={index} className='item'>
+                                                                <tr key={index} className='item' onClick={() => verViaje(u.id)}>
                                                                     <td className="col-1 ">{u.fecha}</td>
                                                                     <td className="col-1 ">{u.dia}</td>
                                                                     <td className="col-1 ">{u.hora}</td>
@@ -361,9 +361,7 @@ function Viajes() {
                                                                     <td className="col-1 ">{u.destino}</td>
                                                                     <td className="col-2 ">{u.encargado}</td>
                                                                     <td className="col-2 ">{u.tipo}</td>
-
-
-                                                                    <td className="col-1  " onClick={() => verViaje(u.id)}> <span className='btn-ver-usuario' >Ver viaje</span></td>
+                                                                    {/* <td className="col-1  " onClick={() => verViaje(u.id)}> <span className='btn-ver-usuario' >Ver viaje</span></td> */}
                                                                 </tr>
                                                             ))}
 
@@ -397,71 +395,65 @@ function Viajes() {
                                         </div>
                                     </div>
 
-                                    <Modal isOpen={modalVer}>
-                                        <div className='title-page' >
-                                            Datos de la viaje
-                                        </div>
+                                    <Modal isOpen={modalVer} toggle={() => setModalVerViaje(!modalVer)} fullscreen>
+                                        <ModalHeader toggle={() => { setModalVerViaje(!modalVer); listarViajes() }}>DATOS GENERALES</ModalHeader>
+                                        {viaje.length > 0 &&
+                                            <div className='modal-cabecera' >
+                                                <p className='fecha-modal'>{'Programación del viaje previsto ' + fechaFormat + ', '}</p>
+                                                <p className='dia-modal'>{'Ruta Programado para el dia ' + viaje[0].dia + '  a horas ' + viaje[0].hora}</p>
+                                                <p className='duracion-modal'>{'Duración del viaje ' + viaje[0].duracion + ' Horas'}</p>
+                                                <Button
+                                                    color="primary"
+                                                    onClick={() => { rellenar() }}
+                                                >
+                                                    Actualizar
+                                                </Button>
+                                            </div>
+                                        }
                                         <ModalBody>
                                             {viaje.length > 0 &&
                                                 <div>
                                                     <div className='more-info'>
 
-                                                        <table style={{ width: '100%' }}>
-                                                            <thead className='tbl-head'> <th>FECHA</th></thead>
-                                                            <tr> <td className='dia-tbl' style={{ border: '0px', fontSize: '18px' }}>{fechaFormat}</td> </tr>
-                                                            <br />
-                                                        </table >
-                                                        <table style={{ width: '60%' }}>
-                                                            <thead className='tbl-head'> <th>DIA</th> <th>HORA</th></thead>
-                                                            <tr> <td className='dia-tbl'>{viaje[0].dia}</td> <td className='hora-tbl'>{viaje[0].hora}</td></tr>
-                                                            <br />
-                                                        </table >
-                                                        <table style={{ width: '100%', marginBottom: '10px' }} >
-                                                            <thead className='tbl-head'> <th> ORIGEN</th> <th></th></thead>
-                                                            <tr > <td className='dia-tbl'>{viaje[0].origen}</td><td className='hora-tbl'>{viaje[0].lugarorigen}</td></tr>
-                                                        </table>
+                                                        <div className='row '>
+                                                            <div className='col-6'>
+                                                                <p className='origen-titulo-modal'>Origen</p>
+                                                                <p className='origen-modal'>{viaje[0].origen}</p>
+                                                                <p className='origen-especifico-modal'>{viaje[0].lugarorigen}</p>
+                                                            </div>
 
-                                                        <table style={{ width: '100%', marginBottom: '20px' }} >
-                                                            <thead className='tbl-head'> <th>DESTINO</th> <th></th></thead>
-                                                            <tr className='horadia-tbl'> <td className='dia-tbl'> {viaje[0].destino}</td><td className='hora-tbl'>{viaje[0].lugardestino}</td></tr>
-                                                        </table>
+                                                            <div className='col-6'>
+                                                                <p className='origen-titulo-modal'>Destino</p>
+                                                                <p className='origen-modal'>{viaje[0].destino}</p>
+                                                                <p className='origen-especifico-modal'>{viaje[0].lugardestino}</p>
 
 
-                                                        <table style={{ width: '50%' }} >
-                                                            <thead className='tbl-head'> <th>DURACION VIAJE</th> <th></th></thead>
-                                                            <tr className='horadia-tbl'> <td className='dia-tbl'> {viaje[0].duracion + ' HRS.'}</td></tr>
-                                                        </table>
+                                                            </div>
+                                                        </div>
+                                                        <br></br>
+                                                        <p className='origen-titulo-modal'>Encargado</p>
+                                                        <p className='origen-modal'>{viaje[0].encargado}</p>
+                                                        <p className='origen-especifico-modal'>{viaje[0].vehiculo}</p>
+                                                        <p className='origen-especifico-modal'>{viaje[0].placa}</p>
+
 
                                                     </div>
                                                     <div className='more-info-add mt-5'>
-                                                        <h2>
-                                                            Otra información
-                                                        </h2>
-                                                        <ul>
-                                                            <li key={'1c'} className='list-adicional' > {viaje[0].editor ? 'Editor:  ' + viaje[0].editor : 'sin validar'}</li>
-                                                            <li key={'1d'} className='list-adicional'>  <FontAwesomeIcon icon={faCalendar} className='more-icon-add' />{viaje[0].creado ? 'Fecha creación : ' + viaje[0].creado : 'Sin fecha'}</li>
-                                                            <li key={'1e'} className='list-adicional'> <FontAwesomeIcon icon={faCalendar} className='more-icon-add' />{viaje[0].modificado ? 'Fecha actualización :  ' + viaje[0].modificado : 'Todavia no se ha actualizado'}</li>
-                                                        </ul>
+                                                        <div>
+                                                            <p className='origen-titulo-modal' > {viaje[0].editor ? viaje[0].editor : 'SIN VALIDAD'}</p>
+                                                            <p className='origen-titulo-modal'> <FontAwesomeIcon icon={faCalendar} className='more-icon-add' />{viaje[0].creado ? 'CREACION  ' + viaje[0].creado : 'SIN FECHA'}{viaje[0].modificado ? '   -   ACTUALIZACION  ' + viaje[0].modificado : 'YYYY-MM-DD'}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
 
                                             }
                                         </ModalBody>
-                                        <div className="row botonModal">
-                                            <div className='btn-cerrar-ventana col-auto' onClick={() => {
-                                                setModalVerViaje(false); listarViajes()
-                                            }} > Cancelar</div>
-
-                                            <div className='btn-nuevo col-auto' onClick={() => { rellenar() }}>Actualizar</div>
-                                        </div>
                                     </Modal>
 
 
                                     <Modal isOpen={modalRegistrar}>
 
-                                        <div className='title-page' >
-                                            Registrar viaje
-                                        </div>
+                                        <ModalHeader toggle={() => setModalRegisttar(!modalRegistrar)}>REGISTRAR VIAJE</ModalHeader>
                                         <ModalBody>
                                             <div className='row'>
                                                 <div className='col-12'>
@@ -500,17 +492,12 @@ function Viajes() {
                                             </div>
                                         </ModalBody>
                                         <div className="row botonModal">
-                                            <div className='btn-cerrar-ventana col-auto' onClick={() => setModalRegisttar(false)} >Cancelar </div>
                                             <div className='btn-nuevo col-auto' onClick={() => { insertarIO() }}> Registrar</div>
-
                                         </div>
                                     </Modal>
 
                                     <Modal isOpen={modalActualizar}>
-
-                                        <div className='title-page' >
-                                            Actualizar viaje
-                                        </div>
+                                        <ModalHeader toggle={() => setModalActualizar(!modalActualizar)}>ACTUALIZAR VIAJE</ModalHeader>
                                         <ModalBody>
                                             <div className='row'>
                                                 <div className='col-12'>
@@ -548,10 +535,9 @@ function Viajes() {
                                                 </div>
                                             </div>
                                         </ModalBody>
-                                        <div className="row botonModal">
-                                            <div className='btn-cerrar-ventana col-auto' onClick={() => setModalActualizar(false)} >Cancelar </div>
+                                        <div className="row botonModal mt-3">
                                             <div className='btn-nuevo col-auto' onClick={() => { actualizarIO() }}>Actualizar</div>
-                                            <div className='btn-eliminar col-auto' onClick={() => eliminar(viaje[0].id)} >Eliminar</div>
+                                            <div className='btn-eliminar ml-2 col-auto' onClick={() => eliminar(viaje[0].id)} >Eliminar</div>
                                         </div>
                                     </Modal>
 

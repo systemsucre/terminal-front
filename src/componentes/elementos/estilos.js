@@ -47,6 +47,8 @@ const Input = styled.input`
     margin-bottom: 0px;   
     transition: .3s ease all;
     border: 1.5px solid ${colores.borde};
+    color:#4c4c51;
+
 
     &:focus {
         border:1.5px solid ${colores.bordes};
@@ -66,6 +68,7 @@ const Input = styled.input`
 
 const InputFile = styled.input` 
 
+color:#4c4c51;
 
     width:100%;
     height: 24px;
@@ -167,8 +170,7 @@ const InputDisabled = styled.input`
     `} 
 `;
 const Inputfecha = styled.input` 
-
-
+    color:#4c4c51;
     width:100%;
     height: 18px;
     font-size: 11px;
@@ -298,9 +300,10 @@ const Parrafos = styled.p`
 
 const SelectStyle = styled.select`
     width:100%;
-    font-size: 14px;
+    font-size: 13px;
     padding: 0 5px 0 5px;  //campos donde va abarcar el texto dentro del input
     transition: .3s ease all;
+    color:#4c4c51;
     border: 1px solid ${colores.borde};
 
     &:focus {
@@ -540,7 +543,7 @@ B {
 export {
     Line,
     grupoInput, Input, InputTabla, Inputfecha, SelectStyle, LeyendaError, IconoValidacion, ContenedorCheck, ContenedorCheck2, ContenedorBotonCentrado,
-    ContenedorMensajeExito, ContenedormensajeError,InputFile,
+    ContenedorMensajeExito, ContenedormensajeError, InputFile,
     IconoValidacionCampos, IconoValidacionCamposBuscar, IconoValidacionCamposSelect, IconoValidacionSelect, IconoValidacionfecha,
     RegistraResultados, InputDisabled, InputArea, IconoValidacionhora, Label, Parrafos, ContenedorCheckSimple, Labelinicio, LabelModal, InputBuscador
 }

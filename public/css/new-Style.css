@@ -1,3 +1,12 @@
+.item {
+    cursor: pointer;
+}
+
+.item:hover {
+    background: #e1e1e1;
+}
+
+
 .fondo-login {
     background-image: url(/public/dist/img/con2.png);
     background-repeat: no-repeat;
@@ -62,7 +71,8 @@
 .contenedor {
     padding-left: 5px;
     padding-right: 5px;
-    height: 375px;
+    height: auto;
+    /* height: 375px; */
 
     border: 1px solid rgb(203, 201, 201);
     border-top: 0px;
@@ -160,42 +170,7 @@ li {
 }
 
 
-.more-info-add {
-    width: 100%;
-    margin: 0px;
-}
 
-.more-info-add h2 {
-    font-weight: bold;
-    color: #3b4064;
-    text-align: left;
-    width: 100%;
-    font-size: 16px;
-    display: block;
-    margin: 10px 0px;
-    padding: 0px;
-    font-style: normal;
-}
-
-.more-info-add ul {
-    list-style: none;
-    padding-left: 5px !important;
-    font-size: 14px !important;
-}
-
-.more-info-ad li {
-    text-align: left !important;
-}
-
-.more-icon-add {
-    color: #417dc1;
-    margin-bottom: 2px;
-    margin-right: 5px;
-}
-
-.list-adicional {
-    font-size: 14px !important;
-}
 
 @media (max-width: 600px) {
     .more-info-add ul li {
@@ -362,46 +337,49 @@ a:active {
 }
 
 .btn-nuevo {
-    background-color: #3b5998;
-    border: none;
-    border-radius: 6px;
-    font-size: 15px;
-    display: flex;
-    align-content: center;
-    line-height: 34px;
-    margin-left: 8px;
-    height: 33px;
+
+
+    font-weight: 600;
+    border: 0.125rem solid transparent;
+    position: relative;
+    border-radius: 0.125rem;
+    background-color: #0078d4;
     color: white;
-    padding: 0 20px;
+    text-decoration: none;
+    padding: 0.625rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1;
     cursor: pointer;
-    font-weight: bold;
+    margin-right: 0.4rem;
+    margin-bottom: 1rem;
+
 }
 
 .btn-nuevo:hover {
     transition: .3s ease-in-out all;
-    background-color: #2b406c;
+    background-color: #0560a5;
 }
 
 
 .btn-eliminar {
+    font-weight: 600;
+    border: 0.125rem solid transparent;
+    position: relative;
+    border-radius: 0.125rem;
     background-color: #d83131;
-    border: none;
-    border-radius: 6px;
-    font-size: 15px;
-    display: flex;
-    align-content: center;
-    line-height: 34px;
-    margin-left: 8px;
-    height: 33px;
     color: white;
-    padding: 0 20px;
+    text-decoration: none;
+    padding: 0.625rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1;
     cursor: pointer;
-    font-weight: bold;
+    margin-right: 0.4rem;
+    margin-bottom: 1rem;
 }
 
 .btn-eliminar:hover {
-    background: #a92727;
     transition: .3s ease-in-out all;
+    background-color: #a92727;
 }
 
 .field {
@@ -480,7 +458,9 @@ a:active {
 
 .custom {
 
-    height: 300px;
+    /* height: 300px; */
+    height: auto;
+
     box-sizing: content-box;
     width: auto;
 }
@@ -533,17 +513,16 @@ label {
 thead {
     position: sticky;
     top: 0px;
+    font-size: 12px;
     /* background: rgb(67, 67, 67); */
-    background: #3b5998;
-    color: white;
-    font-size: 18px;
+    background: white;
+    color: #696969;
     border: none;
     z-index: 1;
 }
 
 tr {
     width: 100%;
-    font-size: 13px;
 
 }
 
@@ -552,7 +531,8 @@ th {
 }
 
 td {
-    border: 1px solid #e0e0e0;
+    border: 1px solid #bfbfbf !important;
+    color: #545454;
 
 }
 
@@ -568,7 +548,7 @@ td {
 
 
 .container-4 input {
-    width: 250px;
+    width: 350;
     height: 30px;
     background: white;
     border: 1px solid rgb(199, 199, 199);
@@ -753,6 +733,7 @@ td {
     font-style: italic;
     cursor: pointer;
 }
+
 .asiento-activo-taxi {
     background-repeat: no-repeat;
     background-size: cover;
@@ -778,6 +759,7 @@ td {
     cursor: pointer;
 
 }
+
 .asiento-activo-mini {
     background-repeat: no-repeat;
     background-size: cover;
@@ -800,6 +782,7 @@ td {
     cursor: pointer;
 
 }
+
 .asiento-conductor-mini {
     background-repeat: no-repeat;
     background-size: cover;
@@ -823,18 +806,19 @@ td {
 
 /* ESTILOS PARRAFOS VENTANA ASIENTOS */
 
-.item-center{
+.item-center {
     display: flex;
     align-items: center;
 }
-.disponible{
+
+.disponible {
     width: 10px;
     height: 10px;
     border-radius: 20%;
     background: rgb(182, 139, 31);
 }
 
-.no-disponible{
+.no-disponible {
     width: 10px;
     height: 10px;
     border: 1.5px solid rgb(96, 96, 96);
@@ -844,7 +828,7 @@ td {
 
 
 
-.text-orden{
+.text-orden {
     display: flex;
     align-items: center;
 }
@@ -859,6 +843,7 @@ td {
     height: 105px;
     margin: 2px;
 }
+
 .image-surubi {
     background-repeat: no-repeat;
     background-size: cover;
@@ -869,6 +854,7 @@ td {
     height: 105px;
     margin: 2px;
 }
+
 .image-minibus {
     background-repeat: no-repeat;
     background-size: cover;
@@ -879,6 +865,7 @@ td {
     height: 105px;
     margin: 2px;
 }
+
 .image-minibus-largo {
     background-repeat: no-repeat;
     background-size: cover;
@@ -889,14 +876,16 @@ td {
     height: 105px;
     margin: 2px;
 }
-.parrafos-asiento{
+
+.parrafos-asiento {
     margin-top: 15px;
     font-size: 13px;
-    font-weight: bold; 
+    font-weight: bold;
     color: rgb(111, 111, 111);
     text-align: left;
 }
-.descripcion-vehiculo{
+
+.descripcion-vehiculo {
     font-size: 10px;
     font-weight: lighter;
     margin-bottom: 0rem;
@@ -912,39 +901,18 @@ td {
 
 
 
-/* stilos ver ruta en tabla */
-.tbl-head{
-    background-color: white;
-    color: #4b4f56;
-    font-size: 12px;
-}
-.dia-tbl{
-    font-size: 12px;
-    color:#1C6B9B;
-    font-weight: bold;
-    margin: 10px;
-    border: 2px solid #696969;
-
-}
-.hora-tbl{
-    font-size: 12px;
-    color:#666;
-    font-weight: bold;
-    margin: 10px;
-    border: 2px solid #696969;
-    
-}
 
 
 
 @media only screen and (max-width:400px) {
-    .parrafos-asiento{
+    .parrafos-asiento {
         margin-top: 15px;
         font-size: 11px;
-        font-weight: lighter; 
+        font-weight: lighter;
         color: rgb(111, 111, 111);
         text-align: left;
     }
+
     .container-4 input {
         width: 200px;
         padding-right: 0px;
@@ -961,10 +929,6 @@ td {
 
     }
 
-    thead {
-        font-size: 14px;
-
-    }
 
     tr {
         font-size: 12px;
@@ -997,7 +961,8 @@ td {
     .more-info h2 {
         font-size: 18px;
     }
-    .descripcion-vehiculo{
+
+    .descripcion-vehiculo {
         font-size: 9px;
     }
 
@@ -1026,11 +991,6 @@ td {
     .title-page {
         font-size: 18px;
         padding: 10px;
-
-    }
-
-    thead {
-        font-size: 12px;
 
     }
 
@@ -1087,16 +1047,120 @@ td {
 
 
 /* ALERT */
-.popup-class{
+.popup-class {
     border-radius: 0;
 }
-.popup-class .swal2-confirm{
+
+.popup-class .swal2-confirm {
     background-color: #3b5998 !important;
     font-weight: bold;
 }
 
-.popup-class .swal2-cancel{
+.popup-class .swal2-cancel {
     background-color: #cecece !important;
     color: #606060;
     font-weight: bold;
+}
+
+/* MODALES
+ */
+.modal-content {
+    border-radius: 0px !important;
+    border: 0px !important;
+}
+
+.modal-cabecera {
+    height: auto;
+    width: 100%;
+    background: #333333;
+
+}
+
+.modal-cabecera button {
+    font-weight: 600;
+    border: 0.125rem solid transparent;
+    position: relative;
+    border-radius: 0.125rem;
+    background-color: #0078d4;
+    color: white;
+    text-decoration: none;
+    padding: 0.625rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.modal-cabecera button:hover {
+    background-color: #0078d4;
+}
+
+.fecha-modal {
+    color: beige;
+    margin: 1rem;
+    margin-bottom: 0px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+
+}
+
+.dia-modal {
+    color: beige;
+    margin-left: 1rem;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    text-transform: lowercase;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.duracion-modal {
+    text-transform: none !important;
+    margin: 1rem !important;
+    font-size: 15px;
+    color: rgb(216, 216, 216);
+    font-weight: bold;
+}
+
+.origen-titulo-modal {
+    font-size: 12px;
+    color: #696969;
+    margin-bottom: 0px;
+}
+
+.origen-modal {
+    margin-bottom: 3px;
+    font-size: 16px;
+    color: #333333;
+}
+
+.origen-especifico-modal {
+    font-size: 13px;
+    color: #696969;
+    margin-bottom: 0px;
+}
+
+
+
+
+.more-info-add {
+    width: 100%;
+    margin: 0px;
+}
+
+.more-info-ad li {
+    text-align: left !important;
+}
+
+.more-icon-add {
+    color: #417dc1;
+    margin-bottom: 2px;
+    margin-right: 5px;
+}
+
+.list-adicional {
+    font-size: 14px !important;
 }

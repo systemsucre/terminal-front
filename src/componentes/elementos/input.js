@@ -164,7 +164,7 @@ const Select1 = ({ estado, cambiarEstado, Name, ExpresionRegular, lista, nombre 
     return (
         <div >
             <div className="field">
-                <label>  {etiqueta + '   *  '}
+                <p className='origen-titulo-modal'>  {etiqueta + '   *  '}
 
                     <SelectStyle
                         name={Name}
@@ -184,7 +184,7 @@ const Select1 = ({ estado, cambiarEstado, Name, ExpresionRegular, lista, nombre 
                         ))}
                     </SelectStyle>
                     <LeyendaError>{mensaje}</LeyendaError>
-                </label>
+                </p>
             </div>
         </div>
     )
@@ -381,7 +381,7 @@ const ComponenteInputUser = ({ estado, cambiarEstado, name, placeholder, tipo = 
     return (
         <div >
             <div className=" field" style={{ position: 'relative', paddingBottom: '0px' }}>
-                <label >{important ? etiqueta + '   *' : etiqueta}
+                <p className='origen-titulo-modal'>{important ? etiqueta + '   *' : etiqueta}
 
                     <Input
                         type={tipo}
@@ -397,7 +397,7 @@ const ComponenteInputUser = ({ estado, cambiarEstado, name, placeholder, tipo = 
                         valido={estado.valido}
                     />
                     <LeyendaError>{mensaje}</LeyendaError>
-                </label>
+                </p>
             </div>
         </div >
 
@@ -1038,8 +1038,8 @@ const ComponenteInputBuscar_ = ({ estado, cambiarEstado, name, ExpresionRegular,
     }
 
     return (
-        <div className="fieldRow " >
-            <label className='mr-3'>{etiqueta + ' : '}</label>
+        <div className="" >
+            {/* <label className='mr-3'>{etiqueta + ' : '}</label> */}
             <InputBuscador
                 type='text'
                 value={estado.campo || ''}
