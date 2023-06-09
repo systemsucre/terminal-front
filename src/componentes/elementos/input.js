@@ -10,7 +10,7 @@ import { faPrint, faSearch, faCaretLeft, } from '@fortawesome/free-solid-svg-ico
 import ReactPrint from 'react-to-print'
 import { useRef } from 'react'
 
-// import './my_style.css';
+import './new-Style.css';
 import { URL } from '../../Auth/config';
 import { useState, useEffect } from "react";
 import { Toaster, toast } from 'react-hot-toast'

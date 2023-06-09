@@ -202,8 +202,11 @@ function Usuario() {
                 dir = URL + '/usuario/anterioreliminados'
             else dir = URL + '/usuario/anterior'
             if (lista.length > 0) {
-                const last = lista[0].id
-                console.log(last, lista)
+                let last = []
+                lista.forEach(e => {
+                    last.push(e.id)
+                })
+                last = Math.max(...last)
                 axios.post(dir, { id: last }).then(json => {
                     if (json.data.ok) {
                         setLista(json.data.data)

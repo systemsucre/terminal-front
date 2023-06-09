@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Table, Modal, ModalBody, ModalHeader, Button, } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBusAlt, faCalendar, faHandPointLeft, faHandPointRight, } from '@fortawesome/free-solid-svg-icons';
+import { faBusAlt, faCalendar, faHandPointLeft, faHandPointRight, faList, faListUl, faShippingFast, } from '@fortawesome/free-solid-svg-icons';
 
 import useAuth from "../Auth/useAuth"
 import { Select1, ComponenteInputUser, ComponenteInputBuscar_, Footer } from './elementos/input';  // componente input que incluye algunas de las funcionalidades como, setInput, validaciones cambio de estados
@@ -152,8 +152,11 @@ function Viajes() {
         const anterior = () => {
             let dir = URL + '/viaje/anterior'
             if (lista.length > 0) {
-                const last = lista[0].id
-                console.log(last, lista)
+                let last =[]
+                lista.forEach(e=>{
+                    last.push(e.id)                    
+                })
+                last= Math.max(...last)
                 axios.post(dir, { id: last }).then(json => {
                     if (json.data.ok) {
                         setLista(json.data.data)
@@ -338,12 +341,12 @@ function Viajes() {
                                                     <Table className="table  table-sm p-2 especific">
                                                         <thead>
                                                             <tr >
+                                                                <th className="col-1  btn-acciones-ajuste-tbl"></th>
                                                                 <th className="col-1 ">FECHA</th>
                                                                 <th className="col-1  ">DIA</th>
                                                                 <th className="col-1  ">HORA</th>
-                                                                <th className="col-1 ">ORIGEN</th>
-                                                                <th className="col-1  ">DESTINO</th>
-                                                                <th className="col-2  ">ENCARGADO</th>
+                                                                <th className="col-2 ">ORIGEN</th>
+                                                                <th className="col-2  ">DESTINO</th>
                                                                 <th className="col-2  ">VEHICULO</th>
 
                                                                 {/* <th className="col-1  "></th> */}
@@ -353,13 +356,19 @@ function Viajes() {
                                                         <tbody>
 
                                                             {lista.map((u, index) => (
-                                                                <tr key={index} className='item' onClick={() => verViaje(u.id)}>
+                                                                <tr key={index} className='item'>
+                                                                    <td className="col-1 ">
+                                                                        <Button className='btn-viaje-tbl'><FontAwesomeIcon  icon={faBusAlt}></FontAwesomeIcon></Button>
+                                                                        <Button className='btn-encomienda-tbl'><FontAwesomeIcon  icon={faShippingFast}></FontAwesomeIcon></Button>
+                                                                        <Button className='btn-ver-tbl' onClick={() => verViaje(u.id)}><FontAwesomeIcon  icon={faList}></FontAwesomeIcon></Button>
+
+                                                                    </td>
                                                                     <td className="col-1 ">{u.fecha}</td>
                                                                     <td className="col-1 ">{u.dia}</td>
                                                                     <td className="col-1 ">{u.hora}</td>
-                                                                    <td className="col-1 ">{u.origen}</td>
-                                                                    <td className="col-1 ">{u.destino}</td>
-                                                                    <td className="col-2 ">{u.encargado}</td>
+                                                                    
+                                                                    <td className="col-2 ">{u.origen}</td>
+                                                                    <td className="col-2 ">{u.destino}</td>
                                                                     <td className="col-2 ">{u.tipo}</td>
                                                                     {/* <td className="col-1  " onClick={() => verViaje(u.id)}> <span className='btn-ver-usuario' >Ver viaje</span></td> */}
                                                                 </tr>
